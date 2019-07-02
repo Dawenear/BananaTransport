@@ -1,0 +1,20 @@
+{
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "startLocation": {
+        "type": "string"
+      },
+      "endLocation": {
+        "type": "string"
+      },
+      "transportMethod": {
+        "type": "string"
+      },
+      "deliveryCompany": {
+        "type": "string"
+      }
+    }
+  }
+}

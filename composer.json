@@ -1,0 +1,17 @@
+{
+  "autoload": {
+    "psr-4": {
+      "App\\": "app",
+      "App\\Models\\": "app/models",
+      "App\\Controllers\\": "app/controllers",
+      "App\\Exceptions\\": "app/exceptions"
+    }
+  },
+  "require": {
+    "ext-json": "*",
+    "justinrainbow/json-schema": "^5.2"
+  },
+  "require-dev": {
+    "codeception/codeception": "^3.0"
+  }
+}
