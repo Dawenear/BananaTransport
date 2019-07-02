@@ -7,3 +7,4 @@
 
     $notes = file_get_contents('deliveryNotes.json');
     $handler->handleRoute($notes);
+    echo PHP_EOL;
