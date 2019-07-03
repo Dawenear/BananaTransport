@@ -23,7 +23,12 @@ class ProcessDelivery
             die();
         }
 
-        $this->createNotes($notes);
+        try {
+            $this->createNotes($notes);
+        } catch (\Exception $e) {
+            echo 'got empty json, aborting';
+            die();
+        }
         try {
             $this->reorderArray();
         } catch (\Exception $e) {
@@ -64,10 +69,14 @@ class ProcessDelivery
 
     /**
      * @param $notes string
+     * @throws \Exception
      */
     private function createNotes($notes)
     {
         $array = json_decode($notes, true);
+        if (!$array) {
+            throw new \Exception('empty json');
+        }
         foreach ($array as $note) {
             $this->notes[] = new DeliveryStep($note);
         }
