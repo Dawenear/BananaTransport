@@ -11,6 +11,9 @@ class ProcessDelivery
     /** @var DeliveryStep[] */
     private $notes = [];
 
+    /**
+     * @param $notes string
+     */
     public function handleRoute($notes)
     {
         try {
@@ -21,7 +24,12 @@ class ProcessDelivery
         }
 
         $this->createNotes($notes);
-        $this->reorderArray();
+        try {
+            $this->reorderArray();
+        } catch (\Exception $e) {
+            echo 'Chain is broken - script was unable to solve this pathway';
+            die();
+        }
         $this->printOutput();
 
 
@@ -65,6 +73,9 @@ class ProcessDelivery
         }
     }
 
+    /**
+     * @throws \Exception
+     */
     private function reorderArray()
     {
         $helpArray = $this->notes;
@@ -77,6 +88,7 @@ class ProcessDelivery
 
 
         while (count($this->notes) !== $countNotes) {
+            $currentCount = count($this->notes);
             foreach ($helpArray as $index => $helpNote) {
                 if ($startLocation === $helpNote->getEndLocation()) {
                     $startLocation = $helpNote->getStartLocation();
@@ -87,6 +99,9 @@ class ProcessDelivery
                     $this->notes[] = $helpNote;
                     unset($helpArray[$index]);
                 }
+            }
+            if ($currentCount === count($this->notes)) {
+                throw new \Exception('This chain is broken');
             }
         }
     }

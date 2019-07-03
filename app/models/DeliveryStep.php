@@ -12,6 +12,10 @@ class DeliveryStep
     /** @var string */
     private $deliveryCompany;
 
+    /**
+     * DeliveryStep constructor.
+     * @param $note array
+     */
     function __construct($note)
     {
         $this->startLocation = $note['startLocation'];
