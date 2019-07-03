@@ -1,9 +1,10 @@
-<?php 
+<?php
 
 class DeliveryCest
 {
     const JSON_FILE = 'deliveryNotes.json';
-    const FILE_PROCCESS_ROUTE = '/processRoute.php';
+    const FILE_PROCESS_ROUTE = '/processRoute.php';
+    const RESPONSE_JSON = '/../_data/response.json';
 
     public function _before(AcceptanceTester $I)
     {
@@ -16,7 +17,7 @@ class DeliveryCest
         $I->attachFile('input#jsonFile', self::JSON_FILE);
         $I->click('Process Route', '#processRoute');
 
-        $I->amOnPage(self::FILE_PROCCESS_ROUTE);
-        $I->see(file_get_contents(__DIR__ . '/../_data/response.json'));
+        $I->amOnPage(self::FILE_PROCESS_ROUTE);
+        $I->see(file_get_contents(__DIR__ . self::RESPONSE_JSON));
     }
 }
